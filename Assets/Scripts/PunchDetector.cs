@@ -30,24 +30,22 @@ public class PunchDetector : MonoBehaviour
 
 
 
-    private void OnTriggerEnter(Collider other)
+private void OnTriggerEnter(Collider other)
+{
+    if (!IsPunching()) return;
+
+    // IMPORTANT: works even if the collider you hit is on a child
+    var punchable = other.GetComponentInParent<Punchable>();
+
+    Debug.Log($"Hit: {other.name} | punchable found: {(punchable != null ? punchable.name : "NO")}");
+
+    if (punchable != null)
     {
-        // Ignore collisions unless the hand is punching
-        if (!IsPunching()) return;
-
-        // Try to find a Punchable component on the collided object
-        var punchable = other.GetComponent<Punchable>();
-
-        // Only apply effects if the object supports being punched
-        if (punchable != null)
-        {
-            // Use controller speed as the punch strength
-            float force = pose.GetVelocity().magnitude;
-
-            DealDamage(punchable, force);
-            TriggerHaptics();
-        }
+        float force = pose.GetVelocity().magnitude;
+        DealDamage(punchable, force);
+        TriggerHaptics();
     }
+}
 
     /// <summary>
     /// Applies punch force and damage logic to a Punchable object.

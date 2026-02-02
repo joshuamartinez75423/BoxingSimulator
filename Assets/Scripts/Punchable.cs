@@ -12,8 +12,12 @@ public class Punchable : MonoBehaviour
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.isKinematic = true;
+    rb = GetComponent<Rigidbody>();
+
+    if (rb == null)
+        Debug.LogError($"{name} has Punchable but NO Rigidbody on the same GameObject!");
+
+    rb.isKinematic = true;
     }
 
     /// <summary>
@@ -24,7 +28,12 @@ public class Punchable : MonoBehaviour
     /// </param>
     public void Punch(Vector3 force)
     {
-        rb.isKinematic = false;
-        rb.AddForce(force * punchForceMultiplier, ForceMode.Impulse);
+    var tracker = GetComponent<YardTrackerUntilStop>();
+    Debug.Log($"{name} Punch() called. Tracker found: {(tracker != null)}");
+
+    if (tracker != null) tracker.BeginTracking();
+
+    rb.isKinematic = false;
+    rb.AddForce(force * punchForceMultiplier, ForceMode.Impulse);
     }
 }
