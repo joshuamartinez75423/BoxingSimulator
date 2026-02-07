@@ -5,6 +5,7 @@ public class VRPlayerMovement : MonoBehaviour
 {
     public SteamVR_Input_Sources handType; // Set to "Left Hand" in Inspector
     public SteamVR_Action_Vector2 moveAction; // Select "Move" in Inspector
+    public SteamVR_Action_Boolean sprintAction;
     public float speed = 2.0f;
     CharacterController controller;
     float verticalVelocity;
@@ -21,6 +22,7 @@ public class VRPlayerMovement : MonoBehaviour
         // 1. Get the Vector2 value (X and Y) from the joystick
         Vector2 joystickValue = moveAction.GetAxis(handType);
         Vector3 move = Vector3.zero;
+       
 
         Debug.Log($"X: {joystickValue.x:F2} | Y: {joystickValue.y:F2}");
 

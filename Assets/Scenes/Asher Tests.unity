@@ -581,7 +581,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handType: 1
   moveAction:
-    actionPath: /actions/platformer/in/Move
+    actionPath: /actions/default/in/Move
+    needsReinit: 0
+  sprintAction:
+    actionPath: /actions/default/in/Sprint
     needsReinit: 0
   speed: 5
   gravity: -9.81
