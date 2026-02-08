@@ -22,9 +22,7 @@ public class VRPlayerMovement : MonoBehaviour
         // 1. Get the Vector2 value (X and Y) from the joystick
         Vector2 joystickValue = moveAction.GetAxis(handType);
         Vector3 move = Vector3.zero;
-       
-
-        Debug.Log($"X: {joystickValue.x:F2} | Y: {joystickValue.y:F2}");
+      
 
         if (joystickValue.magnitude > 0.1f) // Deadzone check
         {
