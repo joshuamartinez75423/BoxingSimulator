@@ -16,6 +16,9 @@ public class PunchDetector : MonoBehaviour
     // Minimum controller velocity magnitude required for the motion to count as a punch.
     public float punchVelocityThreshold = 1.5f;
 
+    //multiplier for the punch force
+    public float punchMult = 1f;
+
     /// <summary>
     /// Determines whether the controller is currently moving
     /// fast enough to be considered a punch.
@@ -41,28 +44,17 @@ private void OnTriggerEnter(Collider other)
 
     if (punchable != null)
     {
-        float force = pose.GetVelocity().magnitude;
-        DealDamage(punchable, force);
+        Vector3 velocity;
+        Vector3 angularVelocity;
+
+        pose.GetEstimatedPeakVelocities(out velocity, out angularVelocity);
+
+        float force = velocity.magnitude;
+        Vector3 punchDir = (other.transform.position - pose.transform.position).normalized;
+
+        punchable.Punch(punchDir * force * punchMult);
         TriggerHaptics();
     }
-}
-
-    /// <summary>
-    /// Applies punch force and damage logic to a Punchable object.
-    /// </summary>
-    /// <param name="punchable">
-    /// The object being punched.
-    /// </param>
-    /// <param name="force">
-    /// The magnitude of the punch based on controller velocity.
-    /// </param>
-    void DealDamage(Punchable punchable, float force)
-    {
-        // Direction of the punch based on controller movement
-        Vector3 punchDir = pose.GetVelocity().normalized;
-
-        // Apply force to the Punchable object
-        punchable.Punch(punchDir * force);
     }
 
     /// <summary>
