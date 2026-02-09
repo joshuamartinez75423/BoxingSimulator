@@ -24,8 +24,13 @@ public class YardTrackerUntilStop : MonoBehaviour
     private Vector3 startPos;
     private bool tracking;
     private float underSpeedTimer;
+    private Punchable punchable;
 
-    void Awake() => rb = GetComponent<Rigidbody>();
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        punchable = GetComponent<Punchable>();
+    }
 
     public void BeginTracking()
     {
@@ -58,6 +63,9 @@ public class YardTrackerUntilStop : MonoBehaviour
             // Fire BOTH events
             AnyStoppedYards?.Invoke(gameObject.name, DistanceYards);
             OnStoppedYards?.Invoke(DistanceYards);
+            
+            //Reset the punchable object once it's stopped.
+            punchable.ResetPunchable();
         }
     }
 }
