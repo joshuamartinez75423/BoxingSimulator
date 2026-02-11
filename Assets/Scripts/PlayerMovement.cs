@@ -6,10 +6,12 @@ public class VRPlayerMovement : MonoBehaviour
     public SteamVR_Input_Sources handType; // Set to "Left Hand" in Inspector
     public SteamVR_Action_Vector2 moveAction; // Select "Move" in Inspector
     public SteamVR_Action_Boolean sprintAction;
-    public float speed = 2.0f;
+    public float walkSpeed = 2.0f;
+    public float sprintSpeed = 5f;
     CharacterController controller;
     float verticalVelocity;
     public float gravity = -9.81f;
+    private float speed;
 
     void Start()
     {
@@ -22,10 +24,19 @@ public class VRPlayerMovement : MonoBehaviour
         // 1. Get the Vector2 value (X and Y) from the joystick
         Vector2 joystickValue = moveAction.GetAxis(handType);
         Vector3 move = Vector3.zero;
+        bool isSprinting = sprintAction.GetState(handType);
       
 
         if (joystickValue.magnitude > 0.1f) // Deadzone check
         {
+            if (isSprinting)
+            {
+                Debug.Log("isSprinting is true");
+                speed = sprintSpeed;
+            } else
+            {
+                speed = walkSpeed;
+            }
             // 2. Translate joystick Y to Forward and X to Strafe
             Vector3 direction = new Vector3(joystickValue.x, 0, joystickValue.y);
 

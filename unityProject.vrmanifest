@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.boxingsimulator.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "C:\\Users\\25899018\\Documents\\GitHub\\BoxingSimulator\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "D:\\aLahm2\\BoxingSimulator\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
           "name": "Boxing Simulator [Testing]"
