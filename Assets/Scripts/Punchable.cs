@@ -8,13 +8,13 @@ public class Punchable : MonoBehaviour
     //Multiplies the amount of force applied to the punchable object
     public float punchForceMultiplier = 1;
     public TextMeshProUGUI punchCountText;
-    public TextMeshProUGUI punchTimeText;
     public float extraFriction;
     public float slowSpeed = 1;
 
     private bool punchable = true;
     private int punchCounter = 0;
     private float punchTimer = 0;
+    private Vector3 restingPosition;
 
     //The rigidbody attached to the punchable object
     Rigidbody rb;
@@ -29,6 +29,7 @@ public class Punchable : MonoBehaviour
 
         rb.isKinematic = true;
         punchTimer = 0;
+        restingPosition = rb.position;
     }
 
     private void Update()
@@ -36,15 +37,17 @@ public class Punchable : MonoBehaviour
         if (!punchable)
         {
             punchTimer += Time.deltaTime;
-            if (punchTimeText)
+            if (rb.velocity.magnitude < slowSpeed)
             {
-                punchTimeText.text = "Punch Timer:" + punchTimer.ToString();
-            }
-            
-            if (punchTimer > 6 && rb.velocity.magnitude < slowSpeed)
-            {
+                if (punchTimer > 12)
+                {
+                    rb.velocity *= extraFriction * 0.5f;
+                }
                 rb.velocity *= extraFriction;
             }
+        } else
+        {
+            rb.position = new Vector3(restingPosition.x, rb.position.y, restingPosition.z);
         }
     }
 
@@ -74,6 +77,7 @@ public class Punchable : MonoBehaviour
     public void ResetPunchable()
     {
         rb.isKinematic = true;
+        restingPosition = rb.position;
 
         //bring the ball up to where it is reachable.
         MoveUp(1.7f);
@@ -85,13 +89,13 @@ public class Punchable : MonoBehaviour
     void UpdateScore(int value)
     {
         punchCounter++;
-        punchCountText.text = "Punches: " + punchCounter.ToString() + "\nPunch Timer:" + punchTimer.ToString();
+        punchCountText.text = punchCounter.ToString() + " Punches";
     }  
     
     void ResetScore()
     {
         punchCounter = 0;
-        punchCountText.text = "Punches: " + punchCounter.ToString();
+        punchCountText.text = punchCounter.ToString() + " Punches";
     }
 
     //starts a coroutine to move the ball up

@@ -1,5 +1,5 @@
 using UnityEngine;
-using Valve.VR; // Don't forget this!
+using Valve.VR;
 
 public class VRPlayerMovement : MonoBehaviour
 {

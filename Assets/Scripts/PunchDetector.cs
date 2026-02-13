@@ -42,19 +42,34 @@ private void OnTriggerEnter(Collider other)
 
     Debug.Log($"Hit: {other.name} | punchable found: {(punchable != null ? punchable.name : "NO")}");
 
-    if (punchable != null)
-    {
-        Vector3 velocity;
-        Vector3 angularVelocity;
+        if (punchable != null)
+        {
+            Vector3 velocity;
+            Vector3 angularVelocity;
 
-        pose.GetEstimatedPeakVelocities(out velocity, out angularVelocity);
+            pose.GetEstimatedPeakVelocities(out velocity, out angularVelocity);
 
-        float force = velocity.magnitude;
-        Vector3 punchDir = (other.transform.position - pose.transform.position).normalized;
+            float force = velocity.magnitude;
+            Vector3 punchDir = (other.transform.position - pose.transform.position).normalized;
 
-        punchable.Punch(punchDir * force * punchMult);
-        TriggerHaptics();
-    }
+            float dotProduct = Vector3.Dot(punchDir, Vector3.up);
+            Debug.Log(dotProduct.ToString());
+
+            if (Mathf.Abs(dotProduct) > 0.8)
+            {
+                punchDir = new Vector3(punchDir.x, punchDir.y * 0.5f, punchDir.z).normalized;
+            } else if (dotProduct < 0.55 && dotProduct > -0.1)
+            {
+                punchDir = new Vector3(punchDir.x, Mathf.Abs(punchDir.y) * 1.2f, punchDir.z).normalized;
+            } else if (dotProduct < -1 && dotProduct > 0.35)
+            {
+                punchDir = new Vector3(punchDir.x, 0.05f, punchDir.z).normalized;
+            }
+            
+
+            punchable.Punch(punchDir * force * punchMult);
+            TriggerHaptics();
+        }
     }
 
     /// <summary>
