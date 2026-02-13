@@ -31,7 +31,6 @@ public class VRPlayerMovement : MonoBehaviour
         {
             if (isSprinting)
             {
-                Debug.Log("isSprinting is true");
                 speed = sprintSpeed;
             } else
             {
