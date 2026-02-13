@@ -47,7 +47,6 @@ public class EffectGrass : MonoBehaviour
         {
             rb.drag = drag;
             rb.angularDrag = angularDrag;
-            Debug.Log(rb.drag.ToString() + " " + rb.angularDrag.ToString());
             fairwayTimer = 0;
         }
 
