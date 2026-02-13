@@ -1,6 +1,6 @@
 //Maya ASCII 2024 scene
 //Name: flagpole.ma
-//Last modified: Thu, Feb 12, 2026 08:59:13 PM
+//Last modified: Thu, Feb 12, 2026 11:32:44 PM
 //Codeset: 1252
 requires maya "2024";
 requires -nodeType "aiOptions" -nodeType "aiAOVDriver" -nodeType "aiAOVFilter" "mtoa" "5.3.4.1";
@@ -11,7 +11,7 @@ fileInfo "product" "Maya 2024";
 fileInfo "version" "2024";
 fileInfo "cutIdentifier" "202310181224-69282f2959";
 fileInfo "osv" "Windows 11 Enterprise v2009 (Build: 22631)";
-fileInfo "UUID" "51C37768-4B8E-061B-7891-3A8E70621C7A";
+fileInfo "UUID" "85466EB5-4E2D-50C7-32A7-DBA6AD4E6E80";
 fileInfo "license" "education";
 createNode transform -s -n "persp";
 	rename -uid "BC84DAEC-44E1-5699-19ED-90A46AF53CE9";
@@ -407,7 +407,7 @@ createNode script -n "sceneConfigurationScriptNode";
 	setAttr ".b" -type "string" "playbackOptions -min 1 -max 24 -ast 1 -aet 48 ";
 	setAttr ".st" 6;
 createNode mayaUsdLayerManager -n "mayaUsdLayerManager1";
-	rename -uid "3534A614-46BE-E6AC-2AFA-21864C20ABAB";
+	rename -uid "28FD256E-44DB-53AB-CC02-4A8E6260F11E";
 	setAttr ".sst" -type "string" "";
 select -ne :time1;
 	setAttr ".o" 1;
