@@ -18,6 +18,7 @@ public class Punchable : MonoBehaviour
 
     //The rigidbody attached to the punchable object
     Rigidbody rb;
+    public int PunchCount => punchCounter;
 
     void Awake()
     {
