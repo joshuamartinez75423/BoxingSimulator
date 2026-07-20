@@ -4,6 +4,8 @@ A virtual reality game where you play golf by **punching the ball** instead of s
 
 This project was built as a hands-on exploration of VR game development: hand tracking, real-world physics behavior, and turning a simple idea ("what if golf, but you punch it") into a playable prototype.
 
+**Developed by Joshua Martinez and Asher Lahm.**
+
 ---
 
 ## Table of Contents
